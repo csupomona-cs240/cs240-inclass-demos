@@ -1,0 +1,108 @@
+package edu.cpp.cs240.hash.generics;
+
+public class IntHashTableLinkedListImpl<K, V> implements IntHashTable<K, V> {
+
+	private IntHashTableEntry<K, V>[] data;
+	private int size;
+
+	public IntHashTableLinkedListImpl() {
+		data = new IntHashTableEntry[100];
+		size = 0;
+	}
+
+	private int hash(K key) {
+		return Math.abs(key.hashCode()) % data.length;
+	}
+
+	@Override
+	public void put(K key, V value) {
+		// 1. call the h(x) to get the right index
+		int indexToPut = hash(key);
+
+		IntHashTableEntry<K, V> entry = data[indexToPut];
+		if (entry == null) {
+			data[indexToPut] = new IntHashTableEntry<K, V>(key, value);
+		} else {
+			IntHashTableEntry<K, V> cursor = entry;
+			while(cursor.getNext() != null && cursor.getKey() != key) {
+				cursor = cursor.getNext();
+			}
+			if (cursor.getKey() != key) {
+				cursor.setNext(new IntHashTableEntry<K, V>(key, value));
+			} else {
+				cursor.setValue(value);
+			}
+		}
+		size++;
+	}
+
+	@Override
+	public V get(K key) {
+		// 1. call the h(x) to get the right index
+		int indexToGet = hash(key);
+
+		IntHashTableEntry<K, V> entry = data[indexToGet];
+		if (entry == null) {
+			return null;
+		} else {
+			IntHashTableEntry<K, V> cursor = entry;
+			while(cursor != null && cursor.getKey() != key) {
+				cursor = cursor.getNext();
+			}
+			if (cursor == null) {
+				return null;
+			} else {
+				return cursor.getValue();
+			}
+		}
+
+	}
+
+	@Override
+	public int size() {
+		return size;
+	}
+
+	@Override
+	public void remove(K key) {
+		// 1. call the h(x) to get the index
+		int indexToRemove = hash(key);
+
+		IntHashTableEntry<K, V> entry = data[indexToRemove];
+		if (entry == null) {
+			return;
+		} else {
+			IntHashTableEntry<K, V> cursor = entry;
+			IntHashTableEntry<K, V> prev = null;
+			while(cursor != null && cursor.getKey() != key) {
+				prev = cursor;
+				cursor = cursor.getNext();
+			}
+			if (cursor != null) {
+				if (prev == null) {
+					data[indexToRemove] = cursor.getNext();
+				} else {
+					prev.setNext(cursor.getNext());
+				}
+			}
+		}
+
+		size--;
+	}
+
+
+	public String toString() {
+		String res = "";
+		for(int i = 0; i < data.length; i++) {
+			if (data[i] != null) {
+				IntHashTableEntry<K, V> entry = data[i];
+				while(entry != null) {
+					res += entry.getKey() + "=" + entry.getValue() + "\n";
+					entry = entry.getNext();
+				}
+			}
+		}
+		return res;
+	}
+
+}

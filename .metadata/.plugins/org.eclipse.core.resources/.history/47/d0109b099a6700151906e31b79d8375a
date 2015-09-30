@@ -1,0 +1,28 @@
+package edu.cpp.cs240.hash;
+
+public class IntHashTableTest {
+
+	public static void main(String[] args) {
+//		IntHashTable hashTable = new IntHashTableImpl();
+		IntHashTable hashTable = new IntHashTableLinkedListImpl();
+
+		hashTable.put(123123, 1323823);
+		hashTable.put(323231, 4343);
+		hashTable.put(999383, 5656565);
+		hashTable.put(232999, 3232232);
+		System.out.println(hashTable);
+
+		hashTable.put(328732899, 574854);
+		hashTable.put(23112899, 3232);
+		hashTable.put(118732899, 51174854);
+		System.out.println(hashTable);
+
+		System.out.println(hashTable.get(232999));
+		System.out.println(hashTable.get(328732899));
+		System.out.println();
+
+		hashTable.remove(232999);
+		System.out.println(hashTable);
+	}
+
+}

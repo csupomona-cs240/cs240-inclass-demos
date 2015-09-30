@@ -1,0 +1,7 @@
+package edu.cpp.cs240.generics;
+
+public class AmazonOrder {
+
+	private String id;
+
+}

@@ -1,0 +1,67 @@
+package edu.cpp.cs240.stack;
+
+public class LinkedListBasedIntStack<T> implements IntStack<T> {
+
+	private Node<T> head;
+	private int size;
+
+	public LinkedListBasedIntStack() {
+		head = null;
+		size = 0;
+	}
+
+	@Override
+	public T peek() {
+		if (head != null) {
+			return head.getValue();
+		} else {
+			throw new RuntimeException("Can't peek from an empty stack");
+		}
+	}
+
+	@Override
+	public T pop() {
+		if (head != null) {
+			T value = head.getValue();
+			// remove from the head
+			head = head.getNext();
+			size--;
+			return value;
+		} else {
+			throw new RuntimeException("Can't peek from an empty stack");
+		}
+	}
+
+	@Override
+	public void push(T value) {
+		Node<T> newNode = new Node<T>(value, head);
+		head = newNode;
+		size++;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return size == 0;
+	}
+
+	@Override
+	public int size() {
+		return size;
+	}
+
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("[");
+		Node<T> cursor = head;
+		while(cursor != null) {
+			sb.append(cursor.getValue());
+			if (cursor.getNext() != null) {
+				sb.append(",");
+			}
+			cursor = cursor.getNext();
+		}
+		sb.append("]");
+		return sb.toString();
+	}
+
+}

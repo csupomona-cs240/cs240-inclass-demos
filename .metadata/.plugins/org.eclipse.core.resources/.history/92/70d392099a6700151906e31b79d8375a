@@ -1,0 +1,9 @@
+package edu.cpp.cs240.stack.string;
+
+public class Order {
+
+	private String name;
+	private String addr;
+	private String item;
+	private int qu;
+}

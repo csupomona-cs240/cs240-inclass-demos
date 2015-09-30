@@ -1,0 +1,108 @@
+package edu.cpp.cs240.hash;
+
+public class IntHashTableLinkedListImpl implements IntHashTable {
+
+	private IntHashTableEntry[] data;
+	private int size;
+
+	public IntHashTableLinkedListImpl() {
+		data = new IntHashTableEntry[100];
+		size = 0;
+	}
+
+	private int hash(int key) {
+		return Math.abs(key) % data.length;
+	}
+
+	@Override
+	public void put(int key, int value) {
+		// 1. call the h(x) to get the right index
+		int indexToPut = hash(key);
+
+		IntHashTableEntry entry = data[indexToPut];
+		if (entry == null) {
+			data[indexToPut] = new IntHashTableEntry(key, value);
+		} else {
+			IntHashTableEntry cursor = entry;
+			while(cursor.getNext() != null && cursor.getKey() != key) {
+				cursor = cursor.getNext();
+			}
+			if (cursor.getKey() != key) {
+				cursor.setNext(new IntHashTableEntry(key, value));
+			} else {
+				cursor.setValue(value);
+			}
+		}
+		size++;
+	}
+
+	@Override
+	public Integer get(int key) {
+		// 1. call the h(x) to get the right index
+		int indexToGet = hash(key);
+
+		IntHashTableEntry entry = data[indexToGet];
+		if (entry == null) {
+			return null;
+		} else {
+			IntHashTableEntry cursor = entry;
+			while(cursor != null && cursor.getKey() != key) {
+				cursor = cursor.getNext();
+			}
+			if (cursor == null) {
+				return null;
+			} else {
+				return cursor.getValue();
+			}
+		}
+
+	}
+
+	@Override
+	public int size() {
+		return size;
+	}
+
+	@Override
+	public void remove(int key) {
+		// 1. call the h(x) to get the index
+		int indexToRemove = hash(key);
+
+		IntHashTableEntry entry = data[indexToRemove];
+		if (entry == null) {
+			return;
+		} else {
+			IntHashTableEntry cursor = entry;
+			IntHashTableEntry prev = null;
+			while(cursor != null && cursor.getKey() != key) {
+				prev = cursor;
+				cursor = cursor.getNext();
+			}
+			if (cursor != null) {
+				if (prev == null) {
+					data[indexToRemove] = cursor.getNext();
+				} else {
+					prev.setNext(cursor.getNext());
+				}
+			}
+		}
+
+		size--;
+	}
+
+
+	public String toString() {
+		String res = "";
+		for(int i = 0; i < data.length; i++) {
+			if (data[i] != null) {
+				IntHashTableEntry entry = data[i];
+				while(entry != null) {
+					res += entry.getKey() + "=" + entry.getValue() + "\n";
+					entry = entry.getNext();
+				}
+			}
+		}
+		return res;
+	}
+
+}

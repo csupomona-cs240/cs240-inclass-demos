@@ -1,0 +1,37 @@
+package edu.cpp.cs240.coll;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+public class ListDemo {
+
+	public static void main(String[] args) {
+
+
+		List<String> myList = new LinkedList<String>();
+
+
+
+		myList.add("123");
+		myList.add("32");
+		myList.add("123");
+		myList.add("32");
+		myList.add(2, "abc");
+		System.out.println(myList +  " size: " + myList.size());
+
+		List<String> myList2 = new LinkedList<String>();
+		myList2.add("b");
+		myList2.add("b");
+		myList2.add("d");
+		myList2.add("c");
+
+		myList.addAll(myList2);
+		System.out.println(myList +  " size: " + myList.size());
+
+		System.out.println(myList.contains("b"));
+		System.out.println(myList.indexOf("12dsds3"));
+		System.out.println(myList.subList(2, 4));
+	}
+
+}

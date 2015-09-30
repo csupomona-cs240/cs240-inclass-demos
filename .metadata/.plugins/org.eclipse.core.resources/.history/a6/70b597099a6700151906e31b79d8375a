@@ -1,0 +1,44 @@
+package edu.cpp.cs240.rec;
+
+
+public class ReverseArray {
+
+	public static int binarySearch(int[] a, int n, int i, int j) {
+		while(i <= j) {
+			int m = (i + j) / 2;
+			if (a[m] == n) {
+				return m;
+			}
+			if (a[m] < n) {
+				i = m + 1;
+			} else {
+				j = m - 1;
+			}
+		}
+		return -1;
+	}
+
+	public static int binarySearch2(int[] a, int n, int i, int j) {
+		if (i > j) {
+			return -1;
+		}
+
+		int m = (i + j) / 2;
+		if (a[m] == n) {
+			return m;
+		}
+		if (a[m] < n) {
+			return binarySearch2(a, n, m + 1, j);
+		} else {
+			return binarySearch2(a, n, i, m - 1);
+		}
+	}
+	public static void main(String[] args) {
+		int[] a = {1,2,3,4,5,6,7,8,9,10};
+		System.out.println(binarySearch2(a, 8, 0, 9));
+		System.out.println(binarySearch2(a, 1, 0, 9));
+		System.out.println(binarySearch2(a, 123, 0, 9));
+
+	}
+
+}

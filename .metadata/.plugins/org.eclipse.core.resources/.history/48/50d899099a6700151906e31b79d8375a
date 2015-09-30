@@ -1,0 +1,56 @@
+package edu.cpp.cs240.hash.generics;
+
+public class Test {
+
+	public static void main(String[] args) {
+		IntHashTable<String, FedexPackage> table =
+				new IntHashTableLinkedListImpl<String, FedexPackage>();
+
+		table.put("12321738hfdsfhds", new FedexPackage("123", "LAX", 12327873));
+		table.put("21h321h3212", new FedexPackage("54", "BNA", 127873));
+		table.put("432434324fsd", new FedexPackage("422", "SFO", 122323273));
+		table.put("123123", new FedexPackage("32", "NYC", 12327873));
+		table.put("4324ffdsfds", new FedexPackage("2", "SEA", 12327873));
+
+		System.out.println(table);
+
+		System.out.println(table.get("21h321h3212"));
+	}
+
+}
+
+class FedexPackage {
+	private String id;
+	private String des;
+	private long estTime;
+
+
+	public FedexPackage(String id, String des, long estTime) {
+		super();
+		this.id = id;
+		this.des = des;
+		this.estTime = estTime;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getDes() {
+		return des;
+	}
+	public void setDes(String des) {
+		this.des = des;
+	}
+	public long getEstTime() {
+		return estTime;
+	}
+	public void setEstTime(long estTime) {
+		this.estTime = estTime;
+	}
+
+	public String toString() {
+		return "id: " + id + " des: " + des + " time: " + estTime;
+	}
+}

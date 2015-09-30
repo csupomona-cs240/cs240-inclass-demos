@@ -1,0 +1,29 @@
+package edu.cpp.cs240.stack.string;
+
+public class IntStackTest {
+
+
+	public static void main(String[] args) {
+
+		StringStack stringStack = new LinkedListBasedStringStack();
+
+		//stringStack.push(5);
+		stringStack.push("fdsfd@gmail.com");
+		stringStack.push("john");
+		stringStack.push("billing addr");
+
+		System.out.println(stringStack.size());
+		System.out.println(stringStack);
+
+		System.out.println(stringStack.pop());
+		System.out.println(stringStack.pop());
+		System.out.println(stringStack.pop());
+		System.out.println(stringStack.peek());
+		System.out.println(stringStack.peek());
+		System.out.println(stringStack.peek());
+
+		System.out.println(stringStack.size());
+		System.out.println(stringStack);
+	}
+
+}

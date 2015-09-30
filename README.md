@@ -1,2 +1,2 @@
-# inclass-demos
-All the demo code used in the class.
+# code-examples
+CS240 Code Examples

@@ -1,0 +1,24 @@
+package edu.cpp.cs240.coll;
+
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+public class QueueDemo {
+
+	public static void main(String[] args) {
+		Queue<Integer> myQueue = new PriorityQueue<Integer>();
+		myQueue.add(54);
+		myQueue.add(11);
+		myQueue.add(22);
+		myQueue.add(99);
+
+		System.out.println(myQueue);
+		System.out.println(myQueue.poll());
+		System.out.println(myQueue.poll());
+		System.out.println(myQueue.poll());
+		System.out.println(myQueue.poll());
+
+
+	}
+
+}

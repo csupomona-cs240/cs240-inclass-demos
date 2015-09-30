@@ -1,0 +1,21 @@
+package edu.cpp.cs240.coll;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class MapDemo {
+
+	public static void main(String[] args) {
+		Map<String, Integer> myMap = new HashMap<String, Integer>();
+		myMap.put("123", 4343);
+		myMap.put("fsdf", 11);
+		myMap.put("d8", 23);
+
+		System.out.println(myMap);
+		System.out.println(myMap.get("d8"));
+
+		System.out.println(myMap.keySet());
+		System.out.println(myMap.values());
+	}
+
+}

@@ -1,0 +1,55 @@
+package edu.cpp.cs240.queue;
+
+
+public class LInkedListBasedIntQueue implements IntQueue {
+
+	private Node head;
+	private Node tail;
+	private int size;
+
+	@Override
+	public int peek() {
+		if (head != null) {
+			return head.getValue();
+		} else {
+			throw new RuntimeException("Cannot peek an empty queue");
+		}
+	}
+
+	@Override
+	public int dequeue() {
+		if (head != null) {
+			int value = head.getValue();
+			// remove it
+			head = head.getNext();
+			size--;
+			return value;
+		} else {
+			throw new RuntimeException("Cannot peek an empty queue");
+		}
+	}
+
+	@Override
+	public void enqueue(int value) {
+		Node newNode = new Node(value, null);
+		if (head != null) {
+			tail.setNext(newNode);
+			tail = newNode;
+		} else {
+			head = newNode;
+			tail = head;
+		}
+		size++;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return size == 0;
+	}
+
+	@Override
+	public int size() {
+		return size;
+	}
+
+}

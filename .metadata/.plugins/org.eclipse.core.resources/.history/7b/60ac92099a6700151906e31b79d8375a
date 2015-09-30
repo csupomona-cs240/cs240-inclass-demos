@@ -1,0 +1,53 @@
+package edu.cpp.cs240.stack.string;
+
+public class ArrayBasedStringStack implements StringStack {
+
+	private String[] data;
+	private int size;
+
+	public ArrayBasedStringStack() {
+		data = new String[10];
+		size = 0;
+	}
+
+	@Override
+	public String peek() {
+		return data[size-1];
+	}
+
+	@Override
+	public String pop() {
+		String x = data[size-1];
+		//data[size-1] = 0;
+		size = size -1;
+		return x;
+	}
+
+	@Override
+	public void push(String value) {
+		// check if we have enough capacity
+		if (size == data.length) {
+			String[] data2 = new String[size * 2];
+			for(int i = 0; i < data.length; i++){
+				data2[i] = data[i];
+			}
+			data = data2;
+		}
+
+		// push the value to the top
+		data[size] = value;
+		size++;
+
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return size == 0;
+	}
+
+	@Override
+	public int size() {
+		return size;
+	}
+
+}

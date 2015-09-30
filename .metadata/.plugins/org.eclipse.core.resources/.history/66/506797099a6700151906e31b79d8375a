@@ -1,0 +1,35 @@
+package edu.cpp.cs240.rec;
+
+import java.util.Arrays;
+
+public class BinarySearchArray {
+
+	public static void reverse(int[] a, int i, int j) {
+		int size = j - i + 1;
+		for(int k = 0; k < size / 2; k++) {
+			int tmp = a[k + i];
+			a[k + i] = a[j - k];
+			a[j - k] = tmp;
+		}
+	}
+
+	public static void reverse2(int[] a, int i, int j) {
+		if (i >= j) {
+			return;
+		}
+
+		int tmp = a[i];
+		a[i] = a[j];
+		a[j] = tmp;
+		reverse2(a, i + 1, j - 1);
+	}
+
+	public static void main(String[] args) {
+		int[] a = {1,2,3,4,5,6,7,8,9,10};
+		reverse2(a, 4, 6);
+
+		System.out.println(Arrays.toString(a));
+
+	}
+
+}

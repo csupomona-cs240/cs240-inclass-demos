@@ -1,0 +1,62 @@
+package edu.cpp.cs240.queue;
+
+public class ArrayBasedIntQueue implements IntQueue {
+
+	private int[] data;
+	private int size;
+
+
+	public ArrayBasedIntQueue() {
+		data = new int[10];
+		size = 0;
+	}
+
+	@Override
+	public int peek() {
+		if (size > 0) {
+			return data[0];
+		} else {
+			throw new RuntimeException("Cannot peek an empty queue");
+		}
+	}
+
+	@Override
+	public int dequeue() {
+		if (size > 0) {
+			int value = data[0];
+			for(int i = 0; i < size - 1; i++) {
+				data[i] = data[i + 1];
+			}
+			size--;
+			return value;
+		} else {
+			throw new RuntimeException("Cannot peek an empty queue");
+		}
+	}
+
+	@Override
+	public void enqueue(int value) {
+		if (size == data.length) {
+			int[] data2 = new int[data.length * 2];
+			for(int i = 0; i < data.length; i++) {
+				data2[i] = data[i];
+			}
+			data = data2;
+		}
+		data[size] = value;
+		size++;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return size == 0;
+	}
+
+	@Override
+	public int size() {
+		// TODO Auto-generated method stub
+		return size;
+	}
+
+}

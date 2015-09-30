@@ -1,0 +1,83 @@
+package edu.cpp.cs240.hash;
+
+public class IntHashTableImpl implements IntHashTable {
+
+	private IntHashTableEntry[] data;
+	private int size;
+
+	public IntHashTableImpl() {
+		data = new IntHashTableEntry[100];
+		size = 0;
+	}
+
+	private int hash(int key) {
+		return Math.abs(key) % data.length;
+	}
+
+	@Override
+	public void put(int key, int value) {
+		// 1. call the h(x) to get the right index
+		int indexToPut = hash(key);
+
+		while(data[indexToPut] != null && data[indexToPut].getKey() != key) {
+			indexToPut = (indexToPut + 1) % data.length;
+		}
+
+		IntHashTableEntry entry = new IntHashTableEntry(key, value);
+		data[indexToPut] = entry;
+
+		size++;
+	}
+
+	@Override
+	public Integer get(int key) {
+		// 1. call the h(x) to get the right index
+		int indexToGet = hash(key);
+
+		while(data[indexToGet] != null && data[indexToGet].getKey() != key) {
+			indexToGet = (indexToGet + 1) % data.length;
+		}
+
+		// 2. return
+		if (data[indexToGet] == null) {
+			return null;
+		} else {
+			return data[indexToGet].getValue();
+		}
+	}
+
+	@Override
+	public int size() {
+		return size;
+	}
+
+	@Override
+	public void remove(int key) {
+		// 1. call the h(x) to get the index
+		int indexToRemove = hash(key);
+
+		int backupIndex = indexToRemove;
+		while(data[indexToRemove] != null && data[indexToRemove].getKey() != key) {
+			indexToRemove = (indexToRemove + 1) % data.length;
+			if (indexToRemove == backupIndex) break;
+		}
+
+		// 2. set that index to be null
+		if (data[indexToRemove] != null) {
+			data[indexToRemove] = null;
+			size--;
+		}
+	}
+
+
+	public String toString() {
+		String res = "";
+		for(int i = 0; i < data.length; i++) {
+			if (data[i] != null) {
+				res += data[i].getKey() + "=" + data[i].getValue() + "\n";
+			}
+		}
+		return res;
+	}
+
+}
